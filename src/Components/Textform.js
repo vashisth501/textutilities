@@ -14,7 +14,23 @@ export default function Textform(props) {
         var lowerCaseText = text.toLowerCase();
         setstate(lowerCaseText);
     }
-    const [text, setstate] = useState("Enter your Text Here")
+
+    const clearAll = ()=>{
+        setstate("");
+    }
+
+    const copyText = ()=>{
+         var text = document.querySelector('#mytextbox');
+         text.select();
+         navigator.clipboard.writeText(text.value);   
+    }
+
+    const clearSpaces = ()=>{
+        var spaceRemovedText = text.split(/[ ]+/);
+        setstate(spaceRemovedText.join(" "));
+    }
+
+    const [text, setstate] = useState("")
     return (
         <>
         <div className="container">
@@ -25,6 +41,9 @@ export default function Textform(props) {
             </div>
             <button className="btn btn-primary  mx-1" onClick={changeToUpper}>Convert to UpperCase</button>
             <button className="btn btn-primary  mx-1" onClick={changeToLower}>Convert to LowerCase</button>
+            <button className="btn btn-primary  mx-1" onClick={copyText}>Copy Text</button>
+            <button className="btn btn-primary  mx-1" onClick={clearSpaces}>Clear Extra Spaces</button>
+            <button className="btn btn-outline-danger  mx-1" onClick={clearAll}>Clear All text</button>
             </div>
         </div>
         <div className="container">
